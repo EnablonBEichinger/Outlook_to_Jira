@@ -2,7 +2,8 @@
 The PowerShell script here is designed to work against Microsoft Outlook on Windows to extract the current weeks calendar events for population in to Jira.  The script has been designed to use certain flags in Outlook as filters so as to be able to manage what items go to Jira directly from Outlook. 
 
 ### Repo Content
-Outlook_GatherEventsOnly.ps1 - If you would like to simply get a count of events for the time period.
+**Outlook_GatherEventsOnly.ps1** - If you would like to simply get a count of events for the time period.
+**Jira_Upload_Testing.ps1** - This is a testing script.  Only a shell of the main section this is here in order to be able to test the variables for Jira access to ensure that items are working properly before the first large push of data. 
 
 ### Filters
 The use of the Private flag in Outlook is a filter in this script.  If a user does not want to transfer a calendar entry to Jira the calendar entry can be marked as Private. 
