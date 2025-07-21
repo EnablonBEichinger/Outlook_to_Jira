@@ -4,10 +4,11 @@ $EmailAddress    = ""
 $AccountID       = ""
 $API_Token       = ""
 $ProjectKey      = ""
-$Assignee         = ""
+
+$API_Specific = "/rest/api/2/issue"
+$JiraURI = "https://" + $JiraCloudDomain + $API_Specific
 
 # Encode credentials for Basic Auth
-#$Base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("$EmailAddress':'$API_Token"))
 $authString = $EmailAddress + ":" + $API_Token
 $Base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($authString))
 
@@ -42,6 +43,8 @@ foreach ($appt in $appointments) {
             summary         = $appt.Subject
             issuetype       = @{ name = "Task" }
             assignee        = @{ id = $AccountID}
+            timetracking    = @{ originalEstimate = $appt.Duration }
+            priority        = @{ name = "Medium" }
             # Optional: add assignee, priority, labels, etc.
         }
     }
@@ -59,5 +62,5 @@ foreach ($appt in $appointments) {
         "Authorization" = "Basic $Base64AuthInfo"
         "Content-Type"  = "application/json"
     }
-    Invoke-RestMethod -Uri "https://wkenterprise.atlassian.net/rest/api/2/issue" -Method Post -Headers $headers -Body $jsonBody
+    Invoke-RestMethod -Uri $JiraURI -Method Post -Headers $headers -Body $jsonBody
 }
