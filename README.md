@@ -23,7 +23,7 @@ If setting this script to run as a Scheduled Task, timing is important.  Since i
 **Jira Cloud Domain**
 	- The main URL used for Jira
 **API Token**
-	- Instructions for creating API token can be found: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+	- Instructions for creating API token can be found: [Jira Instructions] (https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
 **Project Key**
 	- Click on "View All Projects"
 	- Filter for the Project you are working on
