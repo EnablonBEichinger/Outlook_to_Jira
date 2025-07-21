@@ -4,11 +4,15 @@ The PowerShell script here is designed to work against Microsoft Outlook on Wind
 ### Repo Content
 - **Outlook_GatherEventsOnly.ps1** - If you would like to simply get a count of events for the time period.
 - **Jira_Upload_Testing.ps1** - This is a testing script.  Only a shell of the main section this is here in order to be able to test the variables for Jira access to ensure that items are working properly before the first large push of data. 
+- **Outlook_To_Jira.ps1** - This is the weekly sync script.  Running this script will pull all non-filtered calendar entries in to Jira.
+- **Outlook_To_Jira_Updates.ps1** - A seperate script adding the ability to do mid-week syncs for new items.  For an item to be added to Jira it needs to be added to the "Jira Update" category.  Be sure to remove it from the category after syncing or it will create a duplicate on the next run. 
 
 ### Filters
-The use of the Private flag in Outlook is a filter in this script.  If a user does not want to transfer a calendar entry to Jira the calendar entry can be marked as Private. 
+The use of the Private flag in Outlook is a filter in this script.  If a user does not want to transfer a calendar entry to Jira the calendar entry can be marked as ***Private***. 
 
-A "*Jira Ignore*" category can be added by the user to their Outlook as well to achieve the same result.  Any meeting added to this category will be ignored for import in to Jira.  
+Outlook Categories needed: 
+	- Jira Ignore - will ignore the item on upload
+	- Jira Update - will add the item using the update script
 
 ### Time Restriction 
 While it can be adjusted there is a time range of 1 week for export.  The theory with that is that this script can be set as a scheduled task for the start of the week so that the users entries can automatically be added for the week.  Since its common for meetings to be added throughout the week, this time frame can also logically be changed to even a single day and set with the same Scheduled Task automation so that the user will freshly have their information daily to reduce edits.  
