@@ -1,9 +1,9 @@
 # === Jira Configuration ===
-$JiraCloudDomain = ""
-$EmailAddress    = ""
-$AccountID       = ""
-$API_Token       = ""
-$ProjectKey      = ""
+$JiraCloudDomain    = ""
+$EmailAddress       = ""
+$AccountID          = ""
+$API_Token          = ""
+$ProjectKey         = ""
 
 $API_Specific = "/rest/api/2/issue"
 $JiraURI = "https://" + $JiraCloudDomain + $API_Specific
@@ -39,7 +39,9 @@ $appointments = @()
 
 # Loop through and collect non-private, non-"Jira Ignore" appointments with duration
 foreach ($item in $filteredItems) {
-    if ($item.Categories -like "*Jira Update*") {
+    if ($item.Sensitivity -ne 2 -and `
+            ($item.Categories -notlike "*Jira Ignore*") -and `
+            ($item.Categories -notlike "*Jira Uploaded*")) {
         $start = [datetime]$item.Start
         $end = [datetime]$item.End
         $duration = $end - $start
@@ -53,6 +55,7 @@ foreach ($item in $filteredItems) {
 
         # Create a custom object for each appointment
         $appt = [PSCustomObject]@{
+            EntryID   = $item.EntryID
             Subject   = "Week $weekNumber - $dayPrefix$($item.Subject)"
             Start     = $start
             End       = $end
@@ -100,4 +103,10 @@ foreach ($appt in $appointments) {
         "Content-Type"  = "application/json"
     }
     Invoke-RestMethod -Uri $JiraURI -Method Post -Headers $headers -Body $jsonBody
+    
+    #write-host $appt.EntryID -ForegroundColor Green
+    
+    #Add the 'Jira Uploaded' category to the calendar item
+    $appt.categories += ";Jira Uploaded"
+    $appt.save()
 }
