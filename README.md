@@ -11,8 +11,8 @@ The PowerShell script here is designed to work against Microsoft Outlook on Wind
 The use of the Private flag in Outlook is a filter in this script.  If a user does not want to transfer a calendar entry to Jira the calendar entry can be marked as ***Private***. 
 
 Outlook Categories needed: 
-	- Jira Ignore - will ignore the item on upload
-	- Jira Update - will add the item using the update script
+- Jira Ignore - will ignore the item on upload
+- Jira Update - will add the item using the update script
 
 ### Time Restriction 
 While it can be adjusted there is a time range of 1 week for export.  The theory with that is that this script can be set as a scheduled task for the start of the week so that the users entries can automatically be added for the week.  Since its common for meetings to be added throughout the week, this time frame can also logically be changed to even a single day and set with the same Scheduled Task automation so that the user will freshly have their information daily to reduce edits.  
@@ -24,10 +24,13 @@ If setting this script to run as a Scheduled Task, timing is important.  Since i
 **Profile ID**
 	- Login to Jira and click to edit your profile
 	- In the URL, after "/people/" this is the profile ID
+
 **Jira Cloud Domain**
 	- The main URL used for Jira
+
 **API Token**
-	- Instructions for creating API token can be found: [Jira Instructions] (https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
+	- Instructions for creating API token can be found: [Jira Instructions](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
+
 **Project Key**
 	- Click on "View All Projects"
 	- Filter for the Project you are working on
