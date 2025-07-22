@@ -11,6 +11,7 @@ The PowerShell script here is designed to work against Microsoft Outlook on Wind
 The use of the Private flag in Outlook is a filter in this script.  If a user does not want to transfer a calendar entry to Jira the calendar entry can be marked as ***Private***. 
 
 Outlook Categories needed: 
+
 	- Jira Ignore - will ignore the item on upload
 	- Jira Update - will add the item using the update script
 
