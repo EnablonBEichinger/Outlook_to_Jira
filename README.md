@@ -2,8 +2,8 @@
 The PowerShell script here is designed to work against Microsoft Outlook on Windows to extract the current weeks calendar events for population in to Jira.  The script has been designed to use certain flags in Outlook as filters so as to be able to manage what items go to Jira directly from Outlook. 
 
 ### Repo Content
-- **Outlook_GatherEventsOnly.ps1** - If you would like to simply get a count of events for the time period.
-- **Jira_Upload_Testing.ps1** - This is a testing script.  Only a shell of the main section this is here in order to be able to test the variables for Jira access to ensure that items are working properly before the first large push of data. 
+- **Testing/Outlook_GatherEventsOnly.ps1** - If you would like to simply get a count of events for the time period.
+- **Testing/Jira_Upload_Testing.ps1** - This is a testing script.  Only a shell of the main section this is here in order to be able to test the variables for Jira access to ensure that items are working properly before the first large push of data. 
 - **Outlook_To_Jira.ps1** - This is the weekly sync script.  Running this script will pull all non-filtered calendar entries in to Jira.
 - **Outlook_To_Jira_Updates.ps1** - A seperate script adding the ability to do mid-week syncs for new items.  For an item to be added to Jira it needs to be added to the "Jira Update" category.  Be sure to remove it from the category after syncing or it will create a duplicate on the next run. 
 - **Outlook_To_Jira-Edit_Categories.ps1** - This version of the script will also utilize a category called 'Jira Uploaded'.  This category will be ignored from being uploaded and will be added to any item that is uploaded so that it will not be duplicated if the script is run in the same week.  
