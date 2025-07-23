@@ -18,7 +18,7 @@ Outlook Categories needed:
 ### Time Restriction 
 While it can be adjusted there is a time range of 1 week for export.  The theory with that is that this script can be set as a scheduled task for the start of the week so that the users entries can automatically be added for the week.  Since its common for meetings to be added throughout the week, this time frame can also logically be changed to even a single day and set with the same Scheduled Task automation so that the user will freshly have their information daily to reduce edits.  
 
-### Be Aware
+## Be Aware
 If setting this script to run as a Scheduled Task, timing is important.  Since it would logically be run from the users machine it should be set for a time when the user will be logged on and Outlook open.  It is not a requirement for Outlook to be open for this script to work, however being open will ensure that the calendar is up to date.   
 
 ### What you are going to need...
