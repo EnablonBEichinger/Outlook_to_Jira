@@ -1,0 +1,13 @@
+{
+	"debugMode": false,
+	"JiraCloudDomain": "",
+	"EmailAddress": "",
+	"AccountID": "",
+	"API_Token": "",
+	"ProjectKey": "",
+	"ParentTaskKey": "",
+	"Division": "",
+	"BusinessUnit": "CPESG-Enablon",
+	"Components": "",
+	"DateOffsetNegative": 0
+}
