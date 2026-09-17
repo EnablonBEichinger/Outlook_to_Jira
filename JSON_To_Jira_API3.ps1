@@ -100,6 +100,46 @@ if ($confirmation -notin @('Y', 'y')) {
     exit
 }
 
+function Get-ReadyJsonContent {
+    param(
+        [Parameter(Mandatory)]
+        [string]$Path,
+        [int]$TimeoutSeconds = 300,
+        [int]$RetrySeconds = 5
+    )
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    $lastError = $null
+
+    do {
+        try {
+            if (Test-Path -LiteralPath $Path) {
+                $content = Get-Content -Raw -LiteralPath $Path -ErrorAction Stop
+                if (-not [string]::IsNullOrWhiteSpace($content)) {
+                    $null = $content | ConvertFrom-Json -ErrorAction Stop
+                    return $content
+                }
+                $lastError = 'The file is empty.'
+            }
+            else {
+                $lastError = 'The file is not visible yet.'
+            }
+        }
+        catch {
+            $lastError = $_.Exception.Message
+        }
+
+        if ((Get-Date) -lt $deadline) {
+            Write-Host "Waiting for '$([System.IO.Path]::GetFileName($Path))' to download and become valid JSON..." -ForegroundColor Yellow
+            Start-Sleep -Seconds $RetrySeconds
+        }
+    } while ((Get-Date) -lt $deadline)
+
+    throw "Unable to read a valid JSON file at '$Path' within $TimeoutSeconds seconds. Last error: $lastError"
+}
+
+$jsonContent = Get-ReadyJsonContent -Path $JsonPath
+
 # Get ISO 8601 week number
 $culture = [System.Globalization.CultureInfo]::InvariantCulture
 $calendarInfo = $culture.Calendar
@@ -109,7 +149,7 @@ $weekNumber = $calendarInfo.GetWeekOfYear($startOfWeek, $weekRule, $firstDayOfWe
 
 # The Outlook export is a single-line JSON array of appointment objects.
 $jsonCulture = [System.Globalization.CultureInfo]::InvariantCulture
-$rows = Get-Content -Raw -LiteralPath $JsonPath | ConvertFrom-Json
+$rows = $jsonContent | ConvertFrom-Json
 $appointments = @()
 
 foreach ($row in $rows) {
